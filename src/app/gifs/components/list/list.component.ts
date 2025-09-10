@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input, signal } from '@angular/core';
 import { ListItemComponent } from "./list-item/list-item.component";
+import { Gif } from '../../interfaces/gif.interface';
 
 @Component({
   selector: 'gifs-list',
@@ -9,6 +10,7 @@ import { ListItemComponent } from "./list-item/list-item.component";
 })
 export class ListComponent {
 
-  @Input({ required: true }) imageUrls: string[] = [];
+  // @Input({ required: true }) imageUrls: Gif[] = [];
+  imageUrls = input.required<Gif[]>();
 
 }
