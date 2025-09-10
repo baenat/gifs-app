@@ -13,8 +13,8 @@ export class GeneralService {
 
   httpClient = inject(HttpClient);
 
-  get<T>(endopoint: string): Observable<T> {
-    return this.httpClient.get<T>(endopoint, { headers: this.httpHeaders });
+  get<T>(endopoint: string, params?: any): Observable<T> {
+    return this.httpClient.get<T>(endopoint, { params, headers: this.httpHeaders });
   }
 
   post<T>(endopoint: string, data: any): Observable<T> {
