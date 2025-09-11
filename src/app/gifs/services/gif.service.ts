@@ -4,6 +4,7 @@ import { GeneralService } from 'src/app/shared/services/general/general.service'
 import type { GiphyResponse } from '../interfaces/giphy.interface';
 import type { Gif } from '../interfaces/gif.interface';
 import { GifMapper } from '../mapper/gif.mapper';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,16 @@ export class GifService {
       this.trendingGifs.set(gifs);
       this.trendingGifsLoading.set(false);
     });
+  }
+
+  getSearchGifs(query: string) {
+    return this._generalService.get<GiphyResponse>(`${environment.giphyApiUrl}/gifs/search`, {
+      api_key: environment.giphyApiKey,
+      q: query,
+      limit: 20
+    }).pipe(
+      map(({ data }) => data),
+      map((items) => GifMapper.mapGiphyToGifArray(items))
+    );
   }
 }
