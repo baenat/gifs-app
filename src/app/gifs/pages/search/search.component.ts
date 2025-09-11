@@ -15,7 +15,6 @@ export class SearchComponent {
   _gifService = inject(GifService);
 
   onSearch(query: string) {
-    console.log({ query })
     this._gifService.getSearchGifs(query)
       .subscribe(resp => {
         this.searchGifs.set(resp);
